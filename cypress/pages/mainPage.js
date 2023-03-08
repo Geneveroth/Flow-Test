@@ -17,7 +17,8 @@ class mainPage {
             const finished = +new Date()
             const elapsed = finished-started
             expect(elapsed, 'cards appear in less than 300ms').to.be.lessThan(301)
-        });;        
+        });        
     }
+    
 }
 module.exports = mainPage;
