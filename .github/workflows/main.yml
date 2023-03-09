@@ -35,9 +35,7 @@ jobs:
           echo what is in this directory?
           ls -a
           echo
-          echo is cypress installed?
-          cypress --version
-          echo
+     
           echo is git installed?
           git --version
                   
