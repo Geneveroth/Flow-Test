@@ -12,6 +12,7 @@ jobs:
       - name: Run Local Server
         run: |
           npm install -D webpack-dev-server 
+          set NODE_OPTIONS=--openssl-legacy-provider
           npm start
       
       - name: Cypress run
