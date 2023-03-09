@@ -11,7 +11,8 @@ jobs:
         
       - name: Run Local Server
         run: |
-          set NODE_OPTIONS=--openssl-legacy-provider
+          npm install -g n
+          n 16.19.1
           npm install -D webpack-dev-server 
           npm start
       
