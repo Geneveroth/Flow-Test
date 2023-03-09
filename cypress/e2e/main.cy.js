@@ -9,12 +9,12 @@ describe('OMDb Technical Tests', () => {
     })
 
     it('Complete a search', () => {
-        homePage.getMovie('crow');
+        homePage.populateList('crow');
     })
 
     it('Test Autocomplete Timing', () => {
           let started          
-        cy.get('input#search').type('velc')
+        cy.get('[type="text"]').type('velc')
         .then(() => {
             started = +new Date();
         });
@@ -27,7 +27,7 @@ describe('OMDb Technical Tests', () => {
     })
     
     it('Validate Card Contents', () => {
-        homePage.getMovie('hat');
+        homePage.populateList('hat');
         homePage.cardImg();
         homePage.cardYear();
         homePage.cardYearText();
@@ -35,7 +35,7 @@ describe('OMDb Technical Tests', () => {
     })
 
     it('Validate Card Image Size', () => {
-        homePage.getMovie('fun');
+        homePage.populateList('fun');
         cy.get('movie-image').eq(0)
         .find('img')
         .invoke('css', 'width')
@@ -43,6 +43,39 @@ describe('OMDb Technical Tests', () => {
     })
 
     it('Validate Search Bar Highlight', () => {
-        cy.get('input#search').click();
+        cy.get('[type="text"]').should('have.css', 'outline', 'rgb(0, 0, 0) none 0px')
+            .click();
+        cy.get('[type="text"]').should('have.css', 'outline', 'rgb(16, 16, 16) auto 1px');
     })
+
+    // it('Validate Movie Page Displays Correct Content', () => {
+    //    homePage.openCard('shark');
+    //    homePage.moviePageImage();
+    // })
+    // As per the spec, this test does not function, but this is how it would be written if it were to function.
+
+    // it('Paste Movie Title', () => {
+        // cy.get('[type="text"]').type('fan')
+        // cy.get('[type="text"]').should('not.be.disabled').type('{selectAll}{ctrl+x}',{force:true})
+        
+        // const textToPaste = 'pants'
+        // cy.get('[type="text"]').invoke('val', textToPaste).then(() => {
+        //     cy.get('[type=text]').type('{selectAll}{ctrl+x}')
+        //     cy.get('[type=text]').type('{ctrl+x}')
+        // })
+        // homePage.cardImg();
+        // homePage.cardYear();
+        // homePage.cardYearText();
+        // homePage.cardTitle();
+    //   })
+
+    it('Mock Movie Data', () => {
+        cy.fixture('exampleMovie').then((data) => {
+            homePage.populateList('Hat')
+            // homePage.cardTitle() 
+            //figure out how to use the return of the above method instead of getting it a second time
+            cy.get('movie-title').eq(0).find('h3').invoke('text', data.movieTitle)
+        })
+    })
+
 })
