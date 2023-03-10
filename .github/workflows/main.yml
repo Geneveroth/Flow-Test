@@ -7,16 +7,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+        uses: actions/checkout@v3
+        
+      - name: Run Local Server
+        uses: actions/setup-node@v3
         with:
           node-version: '16.15.x'
-        
-      - name: Run Local Server and Cypress Tests
+          run: sh./run-server.sh
+       
+       
+      - name: Run Cypress Tests
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
-          command: sh./github-actions-script.sh
+          run: sh./run-cypress.sh
  
           
          
