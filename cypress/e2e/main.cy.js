@@ -4,11 +4,11 @@ const homePage = new mainPage();
 
 describe('OMDb Technical Tests', () => {
     //using beforeEach instead of before because it will navigate out of the shadow DOM after each individual command. Re-navigating is not ideal-this needs to be fixed. cy.session wasn't working because I have no value to pass into the "id" parameter, like there would be if logging in.
-    beforeEach(() => {
+    before(() => {
         homePage.visit();
     })
 
-    it.only('Complete a search', () => {
+    it('Complete a search', () => {
         homePage.populateList('crow');
     })
 
@@ -56,7 +56,7 @@ describe('OMDb Technical Tests', () => {
     // As per the spec, this test does not function, but this is how it would be written if it were to function.
 
      it('Paste Movie Title', () => {
-        cy.get('[type="text"]').type('fan{selectAll}{ctrl+x}')
+        // cy.get('[type="text"]').type('fan{selectAll}{ctrl+x}')
         // .trigger('keydown', { keyCode: 17})
         // .trigger('keydown', { keyCode: 88})
         // cy.wait(500)
@@ -77,25 +77,32 @@ describe('OMDb Technical Tests', () => {
         //     .wait(4000)
         //     .invoke('val',pasted)
         // })
+    
         // cy.get('[type="text"]').invoke('val', 'cat').then(() => {
-            // cy.window().invoke('navigator.clipboard.writeText','new').then(() =>{
-            //     cy.invoke('val','new')
-            // })
-                // win.navigator.clipboard.writeText('copied text')
+            cy.window().its('navigator.clipboard').invoke('writeText','test')
+            
+        //         win.navigator.clipboard.writeText('copied text')
       
            
-            // .invoke('writeText','test','copied text')
-            // .invoke('readText').should('equal', 'copied text')
-        
+        //     .invoke('writeText','test','copied text')
+        //     .invoke('readText').should('equal', 'copied text')
+        // })
+
+        // cy.window().then(win => {
+        //     win.navigator.clipboard.writeText('copied text').then((text) => {
+        //         expect(text).to.eq('copied text')
+        //     })
+        // })
+
         // cy.get('[type="text"]').invoke('val', textToPaste)
         // cy.wait(3000)
        
         // .type('{backspace}t',{force:true})
         // .trigger('keyup', { keyCode: 49})
-        homePage.cardImg();
-        homePage.cardYear();
-        homePage.cardYearText();
-        homePage.cardTitle();
+        // homePage.cardImg();
+        // homePage.cardYear();
+        // homePage.cardYearText();
+        // homePage.cardTitle();
       })
 
     it('Mock Movie Data', () => {
