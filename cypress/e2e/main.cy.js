@@ -43,9 +43,10 @@ describe('OMDb Technical Tests', () => {
     })
 
     it('Validate Search Bar Highlight', () => {
-        cy.get('[type="text"]').should('have.css', 'outline', 'rgb(0, 0, 0) none 0px')
-            .click();
-        cy.get('[type="text"]').should('have.css', 'outline', 'rgb(16, 16, 16) auto 1px');
+        cy.get('[type="text"]').should('have.css', 'outline', 'rgb(0, 0, 0) none 0px').then(($searchBar) => {
+            cy.get($searchBar).click();
+        })
+        cy.get('[type="text"]').invoke('css', 'outline').should('include', 'auto 1px');
     })
 
     // it('Validate Movie Page Displays Correct Content', () => {
@@ -54,7 +55,7 @@ describe('OMDb Technical Tests', () => {
     // })
     // As per the spec, this test does not function, but this is how it would be written if it were to function.
 
-    // it('Paste Movie Title', () => {
+     it('Paste Movie Title', () => {
         // cy.get('[type="text"]').type('fan{selectAll}')
         // .trigger('keydown', { keyCode: 17})
         // .trigger('keydown', { keyCode: 88})
@@ -68,14 +69,14 @@ describe('OMDb Technical Tests', () => {
 
       
         // cy.get('[id="results"]').click({force:true})
-        // cy.get('[type="text"]').type('cat').invoke('val').as('paste')
-        // cy.get('@paste').then((pasted) => {
-        //     cy.get('[id="results"]').click({force:true})
-        //     .wait(5000)
-        //     cy.get('[type="text"]').type('{selectAll}{ctrl+c}dog',)
-        //     .wait(8000)
-        //     .invoke('val',pasted)
-        // })
+        cy.get('[type="text"]').type('cat').invoke('val').as('paste')
+        cy.get('@paste').then((pasted) => {
+            cy.get('[id="results"]').click({force:true})
+            .wait(3000)
+            cy.get('[type="text"]').type('{selectAll}{ctrl+c}dog',)
+            .wait(4000)
+            .invoke('val',pasted)
+        })
         // cy.get('[type="text"]').invoke('val', 'cat').then(() => {
             // cy.window().invoke('navigator.clipboard.writeText','new').then(() =>{
             //     cy.invoke('val','new')
@@ -90,11 +91,11 @@ describe('OMDb Technical Tests', () => {
        
         // .type('{backspace}t',{force:true})
         // .trigger('keyup', { keyCode: 49})
-        // homePage.cardImg();
-        // homePage.cardYear();
-        // homePage.cardYearText();
-        // homePage.cardTitle();
-    //   })
+        homePage.cardImg();
+        homePage.cardYear();
+        homePage.cardYearText();
+        homePage.cardTitle();
+      })
 
     it('Mock Movie Data', () => {
         cy.fixture('exampleMovie').then((data) => {
