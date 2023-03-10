@@ -7,18 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.15.x'
         
-      - name: Run Local Server
-        run: |
-          sudo npm install -g n
-          sudo n 16.19.1
-          npm install -D webpack-dev-server 
-          npm start
-      
-      - name: Cypress run
+      - name: Run Local Server and Cypress Tests
         uses: cypress-io/github-action@v5
         with:
-          command: npx cypress run
           browser: chrome
+          command: sh./github-actions-script.sh
+ 
+          
          
