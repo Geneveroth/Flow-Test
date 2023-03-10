@@ -56,15 +56,15 @@ describe('OMDb Technical Tests', () => {
     // As per the spec, this test does not function, but this is how it would be written if it were to function.
 
      it('Paste Movie Title', () => {
-        // cy.get('[type="text"]').type('fan{selectAll}')
+        cy.get('[type="text"]').type('fan{selectAll}{ctrl+x}')
         // .trigger('keydown', { keyCode: 17})
         // .trigger('keydown', { keyCode: 88})
         // cy.wait(500)
         // cy.get('[type="text"]').trigger('keyup', { keyCode: 17})
         // .trigger('keyup', { keyCode: 88})
-        // cy.get('[type="text"]').type('{ctrl+shift+v}',{force:true})
         
-        const textToPaste = 'cat'
+        
+        // const textToPaste = 'cat'
         // cy.get('[type="text"]').type('pants{selectAll}{backspace}cat', {force:true})
 
       
@@ -87,8 +87,8 @@ describe('OMDb Technical Tests', () => {
             // .invoke('writeText','test','copied text')
             // .invoke('readText').should('equal', 'copied text')
         
-        cy.get('[type="text"]').invoke('val', textToPaste)
-        cy.wait(3000)
+        // cy.get('[type="text"]').invoke('val', textToPaste)
+        // cy.wait(3000)
        
         // .type('{backspace}t',{force:true})
         // .trigger('keyup', { keyCode: 49})
