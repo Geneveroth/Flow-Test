@@ -14,7 +14,10 @@ jobs:
         with:
           node-version: '16.15.x'
     
-      - name: Run Cypress Tests
+      - name: Run Local Server
+        run: npm start
+        
+      - name: Run Cypress Tests   
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
