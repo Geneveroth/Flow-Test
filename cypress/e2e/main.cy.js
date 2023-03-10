@@ -64,19 +64,19 @@ describe('OMDb Technical Tests', () => {
         // .trigger('keyup', { keyCode: 88})
         // cy.get('[type="text"]').type('{ctrl+shift+v}',{force:true})
         
-        // const textToPaste = 'cat'
+        const textToPaste = 'cat'
         // cy.get('[type="text"]').type('pants{selectAll}{backspace}cat', {force:true})
 
       
         // cy.get('[id="results"]').click({force:true})
-        cy.get('[type="text"]').type('cat').invoke('val').as('paste')
-        cy.get('@paste').then((pasted) => {
-            cy.get('[id="results"]').click({force:true})
-            .wait(3000)
-            cy.get('[type="text"]').type('{selectAll}{ctrl+c}dog',)
-            .wait(4000)
-            .invoke('val',pasted)
-        })
+        // cy.get('[type="text"]').type('cat').invoke('val').as('paste')
+        // cy.get('@paste').then((pasted) => {
+        //     cy.get('[id="results"]').click({force:true})
+        //     .wait(3000)
+        //     cy.get('[type="text"]').type('{selectAll}{ctrl+c}dog',)
+        //     .wait(4000)
+        //     .invoke('val',pasted)
+        // })
         // cy.get('[type="text"]').invoke('val', 'cat').then(() => {
             // cy.window().invoke('navigator.clipboard.writeText','new').then(() =>{
             //     cy.invoke('val','new')
@@ -87,7 +87,7 @@ describe('OMDb Technical Tests', () => {
             // .invoke('writeText','test','copied text')
             // .invoke('readText').should('equal', 'copied text')
         
-        // cy.get('[type="text"]').invoke('val', textToPaste)
+        cy.get('[type="text"]').invoke('val', textToPaste)
        
         // .type('{backspace}t',{force:true})
         // .trigger('keyup', { keyCode: 49})
