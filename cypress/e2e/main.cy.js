@@ -8,45 +8,45 @@ describe('OMDb Technical Tests', () => {
         homePage.visit();
     })
 
-    it('Complete a search', () => {
-        homePage.populateList('crow');
-    })
+    // it('Complete a search', () => {
+    //     homePage.populateList('crow');
+    // })
 
-    it('Test Autocomplete Timing', () => {
-          let started          
-        cy.get('[type="text"]').type('velc')
-        .then(() => {
-            started = +new Date();
-        });
-        cy.get('[class="movie-list-item"]').should('be.visible')
-        .then(() => {
-            const finished = +new Date()
-            const elapsed = finished-started
-            expect(elapsed, 'cards appear in less than 300ms').to.be.lessThan(301)
-        });        
-    })
+    // it('Test Autocomplete Timing', () => {
+    //       let started          
+    //     cy.get('[type="text"]').type('velc')
+    //     .then(() => {
+    //         started = +new Date();
+    //     });
+    //     cy.get('[class="movie-list-item"]').should('be.visible')
+    //     .then(() => {
+    //         const finished = +new Date()
+    //         const elapsed = finished-started
+    //         expect(elapsed, 'cards appear in less than 300ms').to.be.lessThan(301)
+    //     });        
+    // })
     
-    it('Validate Card Contents', () => {
-        homePage.populateList('hat');
-        homePage.cardImg();
-        homePage.cardYear();
-        homePage.cardYearText();
-        homePage.cardTitle();
-    })
+    // it('Validate Card Contents', () => {
+    //     homePage.populateList('hat');
+    //     homePage.cardImg();
+    //     homePage.cardYear();
+    //     homePage.cardYearText();
+    //     homePage.cardTitle();
+    // })
 
-    it('Validate Card Image Size', () => {
-        homePage.populateList('fun');
-        cy.get('movie-image').eq(0)
-        .find('img')
-        .invoke('css', 'width')
-        .then(str => parseInt(str)).should('eq', 40)
-    })
+    // it('Validate Card Image Size', () => {
+    //     homePage.populateList('fun');
+    //     cy.get('movie-image').eq(0)
+    //     .find('img')
+    //     .invoke('css', 'width')
+    //     .then(str => parseInt(str)).should('eq', 40)
+    // })
 
-    it('Validate Search Bar Highlight', () => {
-        cy.get('[type="text"]').should('have.css', 'outline', 'rgb(0, 0, 0) none 0px')
-            .click();
-        cy.get('[type="text"]').should('have.css', 'outline', 'rgb(16, 16, 16) auto 1px');
-    })
+    // it('Validate Search Bar Highlight', () => {
+    //     cy.get('[type="text"]').should('have.css', 'outline', 'rgb(0, 0, 0) none 0px')
+    //         .click();
+    //     cy.get('[type="text"]').should('have.css', 'outline', 'rgb(16, 16, 16) auto 1px');
+    // })
 
     // it('Validate Movie Page Displays Correct Content', () => {
     //    homePage.openCard('shark');
@@ -54,7 +54,7 @@ describe('OMDb Technical Tests', () => {
     // })
     // As per the spec, this test does not function, but this is how it would be written if it were to function.
 
-    // it('Paste Movie Title', () => {
+    it('Paste Movie Title', () => {
         // cy.get('[type="text"]').type('fan{selectAll}')
         // .trigger('keydown', { keyCode: 17})
         // .trigger('keydown', { keyCode: 88})
@@ -63,27 +63,46 @@ describe('OMDb Technical Tests', () => {
         // .trigger('keyup', { keyCode: 88})
         // cy.get('[type="text"]').type('{ctrl+shift+v}',{force:true})
         
-        // const textToPaste = 'cat'
-        // cy.get('[type="text"]').type('pants{selectAll}{backspace}', {force:true})
+        const textToPaste = 'cat'
+        // cy.get('[type="text"]').type('pants{selectAll}{backspace}cat', {force:true})
 
-        //to fix the paste issue of not being detected, try typing a space after invoke
-
+      
         // cy.get('[id="results"]').click({force:true})
-        // cy.get('[type="text"]').type('val')
+        // cy.get('[type="text"]').type('cat').invoke('val').as('paste')
+        // cy.get('@paste').then((pasted) => {
+        //     cy.get('[id="results"]').click({force:true})
+        //     .wait(5000)
+        //     cy.get('[type="text"]').type('{selectAll}{ctrl+c}dog',)
+        //     .wait(8000)
+        //     .invoke('val',pasted)
+        // })
+        // cy.get('[type="text"]').invoke('val', 'cat').then(() => {
+            cy.window().invoke('navigator.clipboard.writeText','new').then(() =>{
+                cy.invoke('val','new')
+            })
+                // win.navigator.clipboard.writeText('copied text')
+      
+           
+            // .invoke('writeText','test','copied text')
+            // .invoke('readText').should('equal', 'copied text')
+        
         // cy.get('[type="text"]').invoke('val', textToPaste)
+       
+        // .type('{backspace}t',{force:true})
+        // .trigger('keyup', { keyCode: 49})
         // homePage.cardImg();
         // homePage.cardYear();
         // homePage.cardYearText();
         // homePage.cardTitle();
-    //   })
+      })
 
-    it('Mock Movie Data', () => {
-        cy.fixture('exampleMovie').then((data) => {
-            homePage.populateList('Hat')
-            // homePage.cardTitle() 
-            //figure out how to use the return of the above method instead of getting it a second time
-            cy.get('movie-title').eq(0).find('h3').invoke('text', data.movieTitle)
-        })
-    })
+    // it('Mock Movie Data', () => {
+    //     cy.fixture('exampleMovie').then((data) => {
+    //         homePage.populateList('Hat')
+    //         // homePage.cardTitle() 
+    //         //figure out how to use the return of the above method instead of getting it a second time
+    //         cy.get('movie-title').eq(0).find('h3').invoke('text', data.movieTitle)
+    //     })
+    // })
 
 })

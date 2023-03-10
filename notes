@@ -10,9 +10,11 @@ Tried the following:
     4. get selector, type word, type selectAll, trigger mousedown, trigger mousemove across coords of the select bar, trigger mouse up, trigger ctrl, trigger x
         -get selector again, type ctrl v 
     5. set const to text I was looking to paste, get selector, invoke val with const name set as value
-        *this would show no autocomplete results*
+        *this would show no autocomplete results unless I typed another character after pasting or deleted the final character and retyped it*
     6. set const to text I was looking to paste, get selector, type different word than paste value, type select all, type backspace, invoke val with const name set as value
-        *this would show autocomplete results for the original text and not the pasted text*
+        *this would show autocomplete results for the original text and not the pasted text.*
 
 It seems like the application will not accept pasted values as valid, only typed values. Further, it will not allow for copying (or pasting) in any method I have been able to find. It type, highlight the text, then appear to enter ctrl+x (or variations of this command), but not actually cut (or copy) the text. I have verified that the events are firing as expected within the console. Finally, I can get copy/paste to work fine in the browser and when I manually copy paste with keystrokes, but not when the automation runs. 
+
+navigator.clipboard.writeText is not able to be set
         
