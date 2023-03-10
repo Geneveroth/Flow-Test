@@ -88,6 +88,7 @@ describe('OMDb Technical Tests', () => {
             // .invoke('readText').should('equal', 'copied text')
         
         cy.get('[type="text"]').invoke('val', textToPaste)
+        cy.wait(3000)
        
         // .type('{backspace}t',{force:true})
         // .trigger('keyup', { keyCode: 49})
