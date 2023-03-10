@@ -1,0 +1,18 @@
+Pasting:
+-without force:true for any typing beyond the first word, it would say the element has an attribute disabled. I look around for this attribute, never found it. Tried to remove disabled attribute or set it to false, but {force:true} was what worked best. Additionally, force clicking a different element and then typing again did allow for typing.  
+Tried the following:  
+    1. get selector, type word, type selectAll, type crtl x
+        -get selector again, type ctrl v
+    2. get selector, type word, type ctrl a, type ctrl c
+        -get selector again, type ctrl v
+    3. get selector, type word, type selectAll, trigger ctrl, trigger x
+        -get selector again, type ctrl v
+    4. get selector, type word, type selectAll, trigger mousedown, trigger mousemove across coords of the select bar, trigger mouse up, trigger ctrl, trigger x
+        -get selector again, type ctrl v 
+    5. set const to text I was looking to paste, get selector, invoke val with const name set as value
+        *this would show no autocomplete results*
+    6. set const to text I was looking to paste, get selector, type different word than paste value, type select all, type backspace, invoke val with const name set as value
+        *this would show autocomplete results for the original text and not the pasted text*
+
+It seems like the application will not accept pasted values as valid, only typed values. Further, it will not allow for copying (or pasting) in any method I have been able to find. It type, highlight the text, then appear to enter ctrl+x (or variations of this command), but not actually cut (or copy) the text. I have verified that the events are firing as expected within the console. Finally, I can get copy/paste to work fine in the browser and when I manually copy paste with keystrokes, but not when the automation runs. 
+        

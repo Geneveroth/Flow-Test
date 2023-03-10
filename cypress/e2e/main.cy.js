@@ -3,7 +3,7 @@ import mainPage from '../pages/mainPage'
 const homePage = new mainPage();
 
 describe('OMDb Technical Tests', () => {
-    //using beforeEach instead of before because it will navigate out of the shadow DOM after each individual command. Re-navigating is not ideal-this is to be fixed.
+    //using beforeEach instead of before because it will navigate out of the shadow DOM after each individual command. Re-navigating is not ideal-this needs to be fixed. cy.session wasn't working because I have no value to pass into the "id" parameter, like there would be if logging in.
     beforeEach(() => {
         homePage.visit();
     })
@@ -55,14 +55,22 @@ describe('OMDb Technical Tests', () => {
     // As per the spec, this test does not function, but this is how it would be written if it were to function.
 
     // it('Paste Movie Title', () => {
-        // cy.get('[type="text"]').type('fan')
-        // cy.get('[type="text"]').should('not.be.disabled').type('{selectAll}{ctrl+x}',{force:true})
+        // cy.get('[type="text"]').type('fan{selectAll}')
+        // .trigger('keydown', { keyCode: 17})
+        // .trigger('keydown', { keyCode: 88})
+        // cy.wait(500)
+        // cy.get('[type="text"]').trigger('keyup', { keyCode: 17})
+        // .trigger('keyup', { keyCode: 88})
+        // cy.get('[type="text"]').type('{ctrl+shift+v}',{force:true})
         
-        // const textToPaste = 'pants'
-        // cy.get('[type="text"]').invoke('val', textToPaste).then(() => {
-        //     cy.get('[type=text]').type('{selectAll}{ctrl+x}')
-        //     cy.get('[type=text]').type('{ctrl+x}')
-        // })
+        // const textToPaste = 'cat'
+        // cy.get('[type="text"]').type('pants{selectAll}{backspace}', {force:true})
+
+        //to fix the paste issue of not being detected, try typing a space after invoke
+
+        // cy.get('[id="results"]').click({force:true})
+        // cy.get('[type="text"]').type('val')
+        // cy.get('[type="text"]').invoke('val', textToPaste)
         // homePage.cardImg();
         // homePage.cardYear();
         // homePage.cardYearText();
