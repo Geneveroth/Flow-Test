@@ -15,7 +15,7 @@ jobs:
           node-version: '16.15.x'
     
       - name: Run Local Server
-        run: npm start
+        run: sh ./run-server.sh
         
       - name: Run Cypress Tests   
         uses: cypress-io/github-action@v5
