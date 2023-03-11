@@ -16,5 +16,101 @@ Tried the following:
 
 It seems like the application will not accept pasted values as valid, only typed values. Further, it will not allow for copying (or pasting) in any method I have been able to find. It type, highlight the text, then appear to enter ctrl+x (or variations of this command), but not actually cut (or copy) the text. I have verified that the events are firing as expected within the console. Finally, I can get copy/paste to work fine in the browser and when I manually copy paste with keystrokes, but not when the automation runs. 
 
-navigator.clipboard.writeText is not able to be set
-        
+navigator.clipboard.writeText is not able to be set. cypress real events don't fire properly, possibly because of the shadow dom
+
+Here is the code I had before using cypress-real-events:
+// //As per the spec, this test does not function, but this is how it would be written if it were to function.
+  // it('Validate Movie Page Displays Correct Content', () => {
+  //     homepage.openCard('shark', 0);
+  //     homepage.moviePageImage(0);
+  // })
+
+  // it('can be granted in Chrome', { browser: 'chrome' }, () => {
+  //     cy.wrap(Cypress.automation('remote:debugger:protocol', {
+  //       command: 'Browser.grantPermissions',
+  //       params: {
+  //         permissions: ['clipboardReadWrite', 'clipboardSanitizedWrite'],
+  //         origin: window.location.origin,
+  //       },
+  //     }))
+
+  //     cy.window().its('navigator.clipboard')
+  //     .then((clip) => {
+  //       return new Cypress.Promise((resolve, reject) => {
+  //         clip.readText()
+  //       })
+
+  // })
+  //     .should('equal', 'npm install -D cypress')
+  // })
+
+  it.only('Paste Movie Title', () => {
+  // cy.get('[type="text"]').type('fan{selectAll}{ctrl+x}')
+  // .trigger('keydown', { keyCode: 17})
+  // .trigger('keydown', { keyCode: 88})
+  // cy.wait(500)
+  // cy.get('[type="text"]').trigger('keyup', { keyCode: 17})
+  // .trigger('keyup', { keyCode: 88})
+
+
+
+  cy.get('[type="text"]').click()
+  cy.realType('pants')
+  cy.realPress(['Control','a', 'Control', 'x'])
+  cy.realType('shoes')
+  cy.realPress(['Control','a', 'Control', 'v'])
+  // cy.get('[id="results"]').click({force:true})
+
+
+
+  // homepage.searchBar().type('cat').invoke('val').as('paste')
+  // cy.get('@paste').then((pasted) => {
+  //     cy.get('[id="results"]').click({force:true})
+  //     cy.get('[type="text"]').realPress(['A'])
+  //     // .invoke('val',pasted)
+  // })
+
+
+  // 
+
+
+
+  //     
+  // })
+
+  // cy.window().then(win => {
+  //     cy.get(win).focus()
+  //     win.navigator.clipboard.writeText('copied text').then((text) => {
+
+  //         expect(text).to.eq('copied text')
+  //     })
+  // })
+
+
+  // const textToPaste = 'cat'
+  // cy.get('[type="text"]').type('pants{ctrl+a}{backspace}').then((box) => {
+  //     cy.get(box).invoke('val', textToPaste)
+  // })
+
+
+  // cy.get('[type="text"]').then(() => {
+
+
+  //         var e = $.Event('keypress');
+  //         e.which = 65; // Character 'A'
+  //         $('item').trigger(e);
+
+  // });
+  // cy.get('[type="text"]').invoke('val', textToPaste)
+  // cy.wait(3000)
+
+
+  // homepage.cardImg(0);
+  // homepage.cardYear(0);
+  // homepage.cardYearText(0);
+  // homepage.cardTitle(0);
+
+
+
+Navigate:
+   -using beforeEach instead of before because it will navigate out of the shadow DOM after each individual command. Re-navigating is not ideal-this needs to be fixed. cy.session wasn't working because I have no value to pass into the "id" parameter, like there would be if logging in.

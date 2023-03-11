@@ -46,6 +46,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "cypress-real-events": "^1.7.6",
     "express": "^4.17.1",
     "express-favicon": "^2.0.1"
   }

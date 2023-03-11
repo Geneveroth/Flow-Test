@@ -2,43 +2,46 @@ class mainPage {
     visit() {
         cy.visit("/")
     }
-    populateList(text) {
-        cy.get('[type="text"]').type(text);
-        return cy.get('[class="movie-list-item"]').eq(0).should('be.visible');
+    searchBar() {
+       return cy.get('[type="text"]')
     }
-    cardImg() {
-        return cy.get('movie-image').eq(0)
+    populateList(text, i) {
+        cy.get('[type="text"]').type(text);
+        return cy.get('[class="movie-list-item"]').eq(i).should('be.visible');
+    }
+    cardImg(i) {
+        return cy.get('movie-image').eq(i)
             .find('img')
             .should('be.visible')
             .and('have.class', 'movie-img')
     }
-    cardTitle() {
-        return cy.get('movie-title').eq(0)
+    cardTitle(i) {
+        return cy.get('movie-title').eq(i)
             .find('h3')
             .should('be.visible')
             .and('have.class', 'movie-title')
     }
-    cardYear() {
-        return cy.get('movie-info').eq(0)
+    cardYear(i) {
+        return cy.get('movie-info').eq(i)
             .find('h2')
             .should('be.visible')
             .and('have.class', 'movie-year')
     }
-    cardYearText() {
-        return cy.get('movie-info').eq(0)
+    cardYearText(i) {
+        return cy.get('movie-info').eq(i)
             .find('h5')
             .should('be.visible')
             .and('have.class', 'movie-year-text')
     }  
-    openCard(text) {
+    openCard(text, i) {
         cy.get('[type="text"]').type(text);
-        cy.get('[class="movie-list-item"]').eq(0).click();
+        cy.get('[class="movie-list-item"]').eq(i).click();
     }
-    moviePageImage() {
-        return cy.get('movie-card').eq(0)
-            .find('img')
-            .should('be.visible')
-            .and('have.attr', 'src')
+    moviePageImage(i) {
+        return cy.get('movie-card').eq(i)
+        .find('img')
+        .should('be.visible')
+        .and('have.attr', 'src')
     }
 
 }
