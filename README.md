@@ -1,7 +1,7 @@
 # QA SDET Technical Challenge						
 1. Please download this zip file and get the "movies-app" running. There are instructions in the zipped README.
 
-Download here: https://s3.amazonaws.com/static.flowinc.com/movies-app.zip
+Download here: Removed for public repo
 
 2. Write out all Functional Tests Cases you would recommend for the movies application. A Test Case summary is sufficient.
 
