@@ -8,7 +8,7 @@ describe('OMDb Technical Tests', () => {
     homepage.visit();
   })
 
-  it('Complete a search', () => {
+  it.only('Complete a search', () => {
     homepage.populateList('crow', 0);
   })
 
