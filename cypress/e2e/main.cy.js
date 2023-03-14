@@ -8,7 +8,7 @@ describe('OMDb Technical Tests', () => {
     homepage.visit()
   })
 
-  it('Complete a search', () => {
+  it.only('Complete a search', () => {
     homepage.searchBar('fun').then(() => {
       homepage.checkList(0)
     })
@@ -69,7 +69,7 @@ describe('OMDb Technical Tests', () => {
   })
 
 
-  it.only('Paste Movie Title', () => {
+  it('Paste Movie Title', () => {
     const textToPaste = 'pants'
     homepage.searchBar(textToPaste).then(() => {
       cy.realPress(['Control', 'a', 'Control', 'x'])
